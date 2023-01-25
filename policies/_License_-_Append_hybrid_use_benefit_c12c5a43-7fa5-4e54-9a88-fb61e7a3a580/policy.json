@@ -1,0 +1,58 @@
+{
+ "properties": {
+  "displayName": "[License] - Append hybrid use benefit",
+  "policyType": "Custom",
+  "mode": "All",
+  "metadata": {
+   "category": "Compute",
+   "createdBy": "c7fdf096-c8fb-441a-8b4e-a1ba557c043e",
+   "createdOn": "2023-01-23T21:19:37.1059696Z",
+   "updatedBy": null,
+   "updatedOn": null
+  },
+  "parameters": {},
+  "policyRule": {
+   "if": {
+    "allOf": [
+     {
+      "field": "type",
+      "in": [
+       "Microsoft.Compute/virtualMachines",
+       "Microsoft.Compute/VirtualMachineScaleSets"
+      ]
+     },
+     {
+      "field": "Microsoft.Compute/imagePublisher",
+      "in": [
+       "MicrosoftWindowsServer",
+       "MicrosoftWindowsDesktop"
+      ]
+     },
+     {
+      "field": "Microsoft.Compute/imageOffer",
+      "in": [
+       "WindowsServer",
+       "Windows-10"
+      ]
+     },
+     {
+      "field": "Microsoft.Compute/licenseType",
+      "notEquals": "Windows_Server"
+     }
+    ]
+   },
+   "then": {
+    "effect": "append",
+    "details": [
+     {
+      "field": "Microsoft.Compute/licenseType",
+      "value": "Windows_Server"
+     }
+    ]
+   }
+  }
+ },
+ "id": "/providers/Microsoft.Management/managementGroups/mgbancobradesconprod/providers/Microsoft.Authorization/policyDefinitions/c12c5a43-7fa5-4e54-9a88-fb61e7a3a580",
+ "type": "Microsoft.Authorization/policyDefinitions",
+ "name": "c12c5a43-7fa5-4e54-9a88-fb61e7a3a580"
+}
